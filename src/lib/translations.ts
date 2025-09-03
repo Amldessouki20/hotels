@@ -23,6 +23,7 @@ export interface Translations {
     createReservation: string;
     allReservations: string;
     allGuests: string;
+    userGroupsManagement: string;
     logout: string;
     loggingOut: string;
     languageToggle: string;
@@ -69,6 +70,9 @@ export interface Translations {
     inactive: string;
     currency: string;
     reviewAndConfirm: string;
+    createdDate: string;
+    optional: string;
+    print: string;
   };
   
   // Booking page translations
@@ -107,6 +111,55 @@ export interface Translations {
     roomRate: string;
     resId: string;
     profileId: string;
+    hotel: string;
+    guestDataEntry: string;
+    fullName: string;
+    enterFullName: string;
+    enterEmail: string;
+    selectHotelFirst: string;
+    paymentDateLabel: string;
+    paidTodayLabel: string;
+    remainingLabel: string;
+    paymentBreakdown: string;
+    methodLabel: string;
+    amountPaidLabel: string;
+    companyLabel: string;
+    travelAgentLabel: string;
+    vipLabel: string;
+    roomNoLabel: string;
+    classificationLabel: string;
+    nationalityLabel: string;
+    telephoneLabel: string;
+    totalLabel: string;
+    guestDetails: string;
+    nameLabel: string;
+    emailLabel: string;
+    departureLabel: string;
+    nightsLabel: string;
+    numberOfRoomsLabel: string;
+    rateLabel: string;
+    perNight: string;
+    arrivalLabel: string;
+    hotelLabel: string;
+    roomTypeLabel: string;
+    boardTypeLabel: string;
+    night: string;
+    total: string;
+    rooms: string;
+    roomDetails: string;
+    departureDate: string;
+    numberOfNights: string;
+    alternativePrice: string;
+    enterAlternativePrice: string;
+    descriptionAmenities: string;
+    selectRoomTypeFirst: string;
+    room: string;
+    maximumRooms: string;
+    arrivalDate: string;
+    loadingData: string;
+    roomsAvailable: string;
+    notAvailable: string;
+    numberOfRooms: string;
   };
   
   // Reservations page translations
@@ -218,7 +271,7 @@ export interface Translations {
     printAll: string;
     noHotelsMatch: string;
     noHotelsAdded: string;
-    hotelDetails: string;
+   
     createdDate: string;
     print: string;
     hotelDetails: string;
@@ -293,6 +346,20 @@ export interface Translations {
     roomQuantity: string;
     enterPriceSAR: string;
     enterAlternativePriceSAR: string;
+    roomInformation: string;
+    price: string;
+    noMatchingRooms: string;
+    roomQuantityPlaceholder: string;
+    enterBasePrice: string;
+    alternativePrice: string;
+    enterAlternativePrice: string;
+    alternativePriceDescription: string;
+    filterByName: string;
+    searchRoomOrHotel: string;
+    filterByType: string;
+    searchRoomType: string;
+    enterRoomDescription: string;
+    enterAltDescription: string;
   };
   
   // Layout and navigation
@@ -372,6 +439,7 @@ const en: Translations = {
     createReservation: 'Create a Reservation',
     allReservations: 'All Reservations',
     allGuests: 'All Guests',
+    userGroupsManagement: 'User Groups & Permissions',
     logout: 'Logout',
     loggingOut: 'Logging out...',
     languageToggle: 'Switch Language',
@@ -417,6 +485,9 @@ const en: Translations = {
     inactive: 'Inactive',
     currency: 'SAR',
     reviewAndConfirm: 'Review and Confirm',
+    createdDate: 'Created Date',
+    optional: 'Optional',
+    print: 'Print',
   },
   
   booking: {
@@ -454,56 +525,55 @@ const en: Translations = {
     roomRate: 'Room Rate',
     resId: 'Reservation ID',
     profileId: 'Profile ID',
-    hotel: 'Hotel',
     guestDataEntry: 'Guest Data Entry',
     fullName: 'Full Name',
     enterFullName: 'Enter full name',
-    email: 'Email',
     enterEmail: 'Enter email address',
     selectHotelFirst: 'Select hotel first',
-    roomsAvailable: 'rooms available',
-    notAvailable: 'Not available',
-    numberOfRooms: 'Number of Rooms',
-    selectRoomTypeFirst: 'Select room type first',
-    room: 'room',
+    hotel: 'Hotel',
+    paymentDateLabel: 'Payment Date',
+    paidTodayLabel: 'Paid Today',
+    remainingLabel: 'Remaining Balance',
+    paymentBreakdown: 'Payment Breakdown',
+    methodLabel: 'Payment Method',
+    amountPaidLabel: 'Amount Paid',
+    companyLabel: 'Company',
+    travelAgentLabel: 'Travel Agent',
+    vipLabel: 'VIP Status',
+    roomNoLabel: 'Room Number',
+    classificationLabel: 'Classification',
+    nationalityLabel: 'Nationality',
+    telephoneLabel: 'Telephone',
+    totalLabel: 'Total',
+    guestDetails: 'Guest Details',
+    nameLabel: 'Name',
+    emailLabel: 'Email',
+    departureLabel: 'Departure',
+    nightsLabel: 'Nights',
+    numberOfRoomsLabel: 'Number of Rooms',
+    rateLabel: 'Rate',
+    perNight: ' per night',
+    arrivalLabel: 'Arrival',
+    hotelLabel: 'Hotel',
+    roomTypeLabel: 'Room Type',
+    boardTypeLabel: 'Board Type',
+    night: 'night',
+    total: 'Total',
     rooms: 'rooms',
-    maximumRooms: 'Maximum: {{count}} rooms available',
-    arrivalDate: 'Arrival Date',
+    roomDetails: 'Room Details',
     departureDate: 'Departure Date',
     numberOfNights: 'Number of Nights',
-    night: 'night',
-    nights: 'nights',
     alternativePrice: 'Alternative Price',
     enterAlternativePrice: 'Enter alternative price',
-    descriptionAmenities: 'Description & Amenities:',
-    total: 'Total',
-    roomDetails: 'Room Details',
-    guestDetails: 'Guest Details',
-    paymentBreakdown: 'Payment Breakdown',
-    hotelLabel: 'Hotel:',
-    roomTypeLabel: 'Room Type:',
-    boardTypeLabel: 'Board Type:',
-    rateLabel: 'Rate:',
-    arrivalLabel: 'Arrival:',
-    departureLabel: 'Departure:',
-    nightsLabel: 'Nights:',
-    numberOfRoomsLabel: 'Number of Rooms:',
-    totalLabel: 'Total:',
-    nameLabel: 'Name:',
-    emailLabel: 'Email:',
-    classificationLabel: 'Classification:',
-    nationalityLabel: 'Nationality:',
-    telephoneLabel: 'Telephone:',
-    companyLabel: 'Company:',
-    travelAgentLabel: 'Travel Agent:',
-    vipLabel: 'VIP:',
-    roomNoLabel: 'Room No:',
-    methodLabel: 'Method:',
-    amountPaidLabel: 'Amount Paid:',
-    paymentDateLabel: 'Payment Date:',
-    paidTodayLabel: 'Paid Today:',
-    remainingLabel: 'Remaining:',
-    perNight: '/night',
+    descriptionAmenities: 'Description & Amenities',
+    selectRoomTypeFirst: 'Select room type first',
+    room: 'room',
+    maximumRooms: 'Maximum rooms available',
+    arrivalDate: 'Arrival Date',
+    loadingData: 'Loading data...',
+    roomsAvailable: 'rooms available',
+    notAvailable: 'Not Available',
+    numberOfRooms: 'Number of Rooms',
   },
   
   reservations: {
@@ -682,31 +752,23 @@ const en: Translations = {
     enterRoomType: 'Enter room type',
     detailedRoomDescription: 'Detailed room description',
     descriptionOtherLanguage: 'Description in other language',
-    roomQuantity: 'Room quantity',
     enterPriceSAR: 'Enter price in SAR',
     enterAlternativePriceSAR: 'Enter alternative price in SAR',
-    roomTypePlaceholder: 'Enter room type',
-    roomDescriptionPlaceholder: 'Detailed room description',
-    altDescriptionPlaceholder: 'Description in other language',
-    basePricePlaceholder: 'Enter price in SAR',
-    alternativePricePlaceholder: 'Enter alternative price in SAR',
-    seasonalPriceNote: 'Seasonal pricing can be configured later for different periods',
-    filterByName: 'Filter by Name',
-    searchByName: 'Search by name...',
-    filterByType: 'Filter by Type',
-    searchByType: 'Search by type...',
-    noRoomsMatch: 'No rooms match your search',
-    roomDetails: 'Room Details',
-    price: 'Price',
-    enterRoomDescription: 'Detailed room description',
-    enterAltDescription: 'Description in other language',
-    enterBasePrice: 'Enter price in SAR',
-    enterAlternativePrice: 'Enter alternative price in SAR',
-    alternativePriceDescription: 'Seasonal pricing can be configured later for different periods',
-    searchRoomOrHotel: 'Search by room or hotel name...',
-    searchRoomType: 'Search by room type...',
-    noMatchingRooms: 'No rooms match your search',
     roomInformation: 'Room Information',
+    price: 'Price',
+    noMatchingRooms: 'No matching rooms found',
+    roomQuantityPlaceholder: 'Enter number of rooms',
+    enterBasePrice: 'Enter base price',
+    alternativePrice: 'Alternative Price',
+    enterAlternativePrice: 'Enter alternative price',
+    alternativePriceDescription: 'Alternative price description',
+    filterByName: 'Filter by Name',
+    searchRoomOrHotel: 'Search room or hotel',
+    filterByType: 'Filter by Type',
+    searchRoomType: 'Search room type',
+    enterRoomDescription: 'Enter room description',
+    enterAltDescription: 'Enter alternative description',
+    roomQuantity: 'Room quantity',
   },
   
   layout: {
@@ -783,6 +845,7 @@ const ar: Translations = {
     createReservation: 'إنشاء حجز',
     allReservations: 'جميع الحجوزات',
     allGuests: 'جميع النزلاء',
+    userGroupsManagement: 'إدارة مجموعات المستخدمين',
     logout: 'تسجيل الخروج',
     loggingOut: 'جاري تسجيل الخروج...',
     languageToggle: 'تغيير اللغة',
@@ -828,6 +891,9 @@ const ar: Translations = {
     inactive: 'غير نشط',
     currency: 'ريال',
     reviewAndConfirm: 'مراجعة وتأكيد',
+    createdDate: 'تاريخ الإنشاء',
+    optional: 'اختياري',
+    print: 'طباعة',
   },
   
   booking: {
@@ -865,56 +931,55 @@ const ar: Translations = {
     roomRate: 'سعر الغرفة',
     resId: 'رقم الحجز',
     profileId: 'رقم الملف الشخصي',
-    hotel: 'الفندق',
     guestDataEntry: 'بيانات النزيل',
     fullName: 'الاسم الكامل',
     enterFullName: 'أدخل الاسم الكامل',
-    email: 'البريد الإلكتروني',
     enterEmail: 'أدخل البريد الإلكتروني',
     selectHotelFirst: 'اختر الفندق أولاً',
+    hotel: 'الفندق',
+    paymentDateLabel: 'تاريخ الدفع',
+    paidTodayLabel: 'المدفوع اليوم',
+    remainingLabel: 'الرصيد المتبقي',
+    paymentBreakdown: 'تفصيل الدفع',
+    methodLabel: 'طريقة الدفع',
+    amountPaidLabel: 'المبلغ المدفوع',
+    companyLabel: 'الشركة',
+    travelAgentLabel: 'وكيل السفر',
+    vipLabel: 'حالة VIP',
+    roomNoLabel: 'رقم الغرفة',
+    classificationLabel: 'التصنيف',
+    nationalityLabel: 'الجنسية',
+    telephoneLabel: 'الهاتف',
+    totalLabel: 'الإجمالي',
+    guestDetails: 'تفاصيل النزيل',
+    nameLabel: 'الاسم',
+    emailLabel: 'البريد الإلكتروني',
+    departureLabel: 'المغادرة',
+    nightsLabel: 'الليالي',
+    numberOfRoomsLabel: 'عدد الغرف',
+    rateLabel: 'السعر',
+    perNight: ' في الليلة',
+    arrivalLabel: 'الوصول',
+    hotelLabel: 'الفندق',
+    roomTypeLabel: 'نوع الغرفة',
+    boardTypeLabel: 'نوع الإقامة',
+    night: 'ليلة',
+    total: 'الإجمالي',
+    rooms: 'غرف',
+    roomDetails: 'تفاصيل الغرفة',
+    departureDate: 'تاريخ المغادرة',
+    numberOfNights: 'عدد الليالي',
+    alternativePrice: 'السعر البديل',
+    enterAlternativePrice: 'أدخل السعر البديل',
+    descriptionAmenities: 'الوصف والمرافق',
+    selectRoomTypeFirst: 'اختر نوع الغرفة أولاً',
+    room: 'غرفة',
+    maximumRooms: 'الحد الأقصى للغرف المتاحة',
+    arrivalDate: 'تاريخ الوصول',
+    loadingData: 'جاري تحميل البيانات...',
     roomsAvailable: 'غرف متاحة',
     notAvailable: 'غير متاح',
     numberOfRooms: 'عدد الغرف',
-    selectRoomTypeFirst: 'اختر نوع الغرفة أولاً',
-    room: 'غرفة',
-    rooms: 'غرف',
-    maximumRooms: 'الحد الأقصى: {{count}} غرف متاحة',
-    arrivalDate: 'تاريخ الوصول',
-    departureDate: 'تاريخ المغادرة',
-    numberOfNights: 'عدد الليالي',
-    night: 'ليلة',
-    nights: 'ليالي',
-    alternativePrice: 'السعر البديل',
-    enterAlternativePrice: 'أدخل السعر البديل',
-    descriptionAmenities: 'الوصف والخدمات:',
-    total: 'الإجمالي',
-    roomDetails: 'تفاصيل الغرفة',
-    guestDetails: 'بيانات النزيل',
-    paymentBreakdown: 'تفاصيل الدفع',
-    hotelLabel: 'الفندق:',
-    roomTypeLabel: 'نوع الغرفة:',
-    boardTypeLabel: 'نوع الإقامة:',
-    rateLabel: 'السعر:',
-    arrivalLabel: 'الوصول:',
-    departureLabel: 'المغادرة:',
-    nightsLabel: 'الليالي:',
-    numberOfRoomsLabel: 'عدد الغرف:',
-    totalLabel: 'الإجمالي:',
-    nameLabel: 'الاسم:',
-    emailLabel: 'البريد الإلكتروني:',
-    classificationLabel: 'التصنيف:',
-    nationalityLabel: 'الجنسية:',
-    telephoneLabel: 'الهاتف:',
-    companyLabel: 'الشركة:',
-    travelAgentLabel: 'وكيل السفر:',
-    vipLabel: 'شخصية مهمة:',
-    roomNoLabel: 'رقم الغرفة:',
-    methodLabel: 'الطريقة:',
-    amountPaidLabel: 'المبلغ المدفوع:',
-    paymentDateLabel: 'تاريخ الدفع:',
-    paidTodayLabel: 'المدفوع اليوم:',
-    remainingLabel: 'المتبقي:',
-    perNight: '/ليلة',
   },
   
   reservations: {
@@ -1096,28 +1161,20 @@ const ar: Translations = {
     roomQuantity: 'كمية الغرف',
     enterPriceSAR: 'أدخل السعر بالريال السعودي',
     enterAlternativePriceSAR: 'أدخل السعر البديل بالريال السعودي',
-    roomTypePlaceholder: 'أدخل نوع الغرفة',
-    roomDescriptionPlaceholder: 'وصف مفصل للغرفة',
-    altDescriptionPlaceholder: 'الوصف بلغة أخرى',
-    basePricePlaceholder: 'أدخل السعر بالريال السعودي',
-    alternativePricePlaceholder: 'أدخل السعر البديل بالريال السعودي',
-    seasonalPriceNote: 'يمكن تكوين التسعير الموسمي لاحقاً لفترات مختلفة',
-    filterByName: 'تصفية بالاسم',
-    searchByName: 'البحث بالاسم...',
-    filterByType: 'تصفية بالنوع',
-    searchByType: 'البحث بالنوع...',
-    noRoomsMatch: 'لا توجد غرف تطابق البحث',
-    roomDetails: 'تفاصيل الغرفة',
-    price: 'السعر',
-    enterRoomDescription: 'وصف مفصل للغرفة',
-    enterAltDescription: 'الوصف بلغة أخرى',
-    enterBasePrice: 'أدخل السعر بالريال السعودي',
-    enterAlternativePrice: 'أدخل السعر البديل بالريال السعودي',
-    alternativePriceDescription: 'يمكن تكوين التسعير الموسمي لاحقاً لفترات مختلفة',
-    searchRoomOrHotel: 'البحث بالغرفة أو اسم الفندق...',
-    searchRoomType: 'البحث بنوع الغرفة...',
-    noMatchingRooms: 'لا توجد غرف تطابق البحث',
     roomInformation: 'معلومات الغرفة',
+    price: 'السعر',
+    noMatchingRooms: 'لا توجد غرف مطابقة',
+    roomQuantityPlaceholder: 'أدخل عدد الغرف',
+    enterBasePrice: 'أدخل السعر الأساسي',
+    alternativePrice: 'السعر البديل',
+    enterAlternativePrice: 'أدخل السعر البديل',
+    alternativePriceDescription: 'وصف السعر البديل',
+    filterByName: 'تصفية بالاسم',
+    searchRoomOrHotel: 'البحث في الغرف أو الفنادق',
+    filterByType: 'تصفية بالنوع',
+    searchRoomType: 'البحث في نوع الغرفة',
+    enterRoomDescription: 'أدخل وصف الغرفة',
+    enterAltDescription: 'أدخل الوصف البديل',
   },
   
   layout: {

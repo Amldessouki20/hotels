@@ -246,7 +246,7 @@ export default function Booking() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-green-400/20 to-teal-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-pink-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-pink-400/10 to-orange-400/10 rounded-full blur-3xl" style={{transform: 'translate(-50%, -50%)'}}></div>
       </div>
 
       {/* Main content container */}
@@ -275,7 +275,7 @@ export default function Booking() {
                   <select
                     value={selectedHotelId}
                     onChange={(e) => setSelectedHotelId(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   >
                     <option value="">{t('booking.selectHotel')}</option>
                     {hotels.map((hotel) => (
@@ -309,7 +309,7 @@ export default function Booking() {
                             <div
                               key={room.id}
                               onClick={() => isSelectable && setSelectedRoomId(room.id)}
-                              className={`p-3 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+                              className={`p-3 rounded-xl border-2 cursor-pointer ${
                                 selectedRoomId === room.id ? 'ring-2 ring-blue-500' : ''
                               } ${statusColors[room.status]}`}
                             >
@@ -320,7 +320,7 @@ export default function Booking() {
                                   <div className="text-xs mt-1">
                                     {room.status === 'available' ? (
                                       <span className="text-green-600 font-medium">
-                                        {t('booking.roomsAvailable', { count: room.availableCount || 0 })}
+                                        {`${room.availableCount || 0} ${t('booking.roomsAvailable')}`}
                                       </span>
                                     ) : (
                                       <span className="text-red-600 font-medium">
@@ -351,7 +351,7 @@ export default function Booking() {
                     value={numberOfRooms}
                     onChange={(e) => setNumberOfRooms(parseInt(e.target.value))}
                     disabled={!selectedRoomId}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {!selectedRoomId ? (
                       <option value={1}>{t('booking.selectRoomTypeFirst')}</option>
@@ -365,7 +365,7 @@ export default function Booking() {
                   </select>
                   {selectedRoomId && (
                     <div className="text-xs text-gray-600 mt-1">
-                      {t('booking.maximumRooms', { count: getSelectedRoom()?.availableCount || 0 })}
+                      {`${t('booking.maximumRooms')}: ${getSelectedRoom()?.availableCount || 0}`}
                     </div>
                   )}
                 </div>
@@ -382,7 +382,7 @@ export default function Booking() {
                       setArrivalDate(e.target.value);
                       calculateNights(e.target.value, departureDate);
                     }}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   />
                 </div>
                 
@@ -398,7 +398,7 @@ export default function Booking() {
                       setDepartureDate(e.target.value);
                       calculateNights(arrivalDate, e.target.value);
                     }}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   />
                 </div>
                 
@@ -422,7 +422,7 @@ export default function Booking() {
                       type="number"
                       value={guestData.roomRate || 0}
                       onChange={(e) => setGuestData({...guestData, roomRate: parseFloat(e.target.value) || 0})}
-                      className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                      className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                       placeholder={t('booking.enterAlternativePrice')}
                       min="0"
                       step="0.01"
@@ -496,7 +496,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.fullName}
                     onChange={(e) => setGuestData({...guestData, fullName: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={t('booking.enterFullName')}
                   />
                 </div>
@@ -510,7 +510,7 @@ export default function Booking() {
                     type="email"
                     value={guestData.email}
                     onChange={(e) => setGuestData({...guestData, email: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={t('booking.enterEmail')}
                   />
                 </div>
@@ -523,7 +523,7 @@ export default function Booking() {
                   <select
                     value={guestData.guestClassification}
                     onChange={(e) => setGuestData({...guestData, guestClassification: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   >
                     <option value="">{language === 'ar' ? 'اختر تصنيف النزيل' : 'Select guest classification'}</option>
                     <option value="Saudi Citizen">{language === 'ar' ? 'مواطن سعودي' : 'Saudi Citizen'}</option>
@@ -541,7 +541,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.travelAgent}
                     onChange={(e) => setGuestData({...guestData, travelAgent: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل وكيل السفر' : 'Enter travel agent'}
                   />
                 </div>
@@ -555,7 +555,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.company}
                     onChange={(e) => setGuestData({...guestData, company: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل اسم الشركة' : 'Enter company name'}
                   />
                 </div>
@@ -569,7 +569,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.source}
                     onChange={(e) => setGuestData({...guestData, source: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل المصدر' : 'Enter source'}
                   />
                 </div>
@@ -583,7 +583,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.group}
                     onChange={(e) => setGuestData({...guestData, group: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل المجموعة' : 'Enter group'}
                   />
                 </div>
@@ -612,7 +612,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.nationality}
                     onChange={(e) => setGuestData({...guestData, nationality: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل الجنسية' : 'Enter nationality'}
                   />
                 </div>
@@ -626,7 +626,7 @@ export default function Booking() {
                     type="tel"
                     value={guestData.telephone}
                     onChange={(e) => setGuestData({...guestData, telephone: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل رقم الهاتف' : 'Enter telephone number'}
                   />
                 </div>
@@ -640,7 +640,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.roomNo}
                     onChange={(e) => setGuestData({...guestData, roomNo: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل رقم الغرفة' : 'Enter room number'}
                   />
                 </div>
@@ -654,7 +654,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.rateCode}
                     onChange={(e) => setGuestData({...guestData, rateCode: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل كود التعريفة' : 'Enter rate code'}
                   />
                 </div>
@@ -667,7 +667,7 @@ export default function Booking() {
                   <select
                     value={guestData.payment}
                     onChange={(e) => setGuestData({...guestData, payment: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   >
                     <option value="">{language === 'ar' ? 'اختر طريقة الدفع' : 'Select payment method'}</option>
                     <option value="cash">{language === 'ar' ? 'نقدي' : 'Cash'}</option>
@@ -685,7 +685,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.resId}
                     onChange={(e) => setGuestData({...guestData, resId: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل رقم الحجز' : 'Enter reservation ID'}
                   />
                 </div>
@@ -699,7 +699,7 @@ export default function Booking() {
                     type="text"
                     value={guestData.profileId}
                     onChange={(e) => setGuestData({...guestData, profileId: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     placeholder={language === 'ar' ? 'أدخل رقم الملف الشخصي' : 'Enter profile ID'}
                   />
                 </div>
@@ -727,7 +727,7 @@ export default function Booking() {
                     {/* Cash */}
                     <div
                       onClick={() => setPaymentData({...paymentData, method: 'cash'})}
-                      className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+                      className={`p-4 rounded-xl border-2 cursor-pointer ${
                         paymentData.method === 'cash'
                           ? 'border-green-500 bg-green-50/80 shadow-lg'
                           : 'border-gray-200 bg-white/50 hover:border-green-300'
@@ -746,7 +746,7 @@ export default function Booking() {
                     {/* Credit */}
                     <div
                       onClick={() => setPaymentData({...paymentData, method: 'credit'})}
-                      className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+                      className={`p-4 rounded-xl border-2 cursor-pointer ${
                         paymentData.method === 'credit'
                           ? 'border-orange-500 bg-orange-50/80 shadow-lg'
                           : 'border-gray-200 bg-white/50 hover:border-orange-300'
@@ -765,7 +765,7 @@ export default function Booking() {
                     {/* Visa */}
                     <div
                       onClick={() => setPaymentData({...paymentData, method: 'visa'})}
-                      className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
+                      className={`p-4 rounded-xl border-2 cursor-pointer ${
                         paymentData.method === 'visa'
                           ? 'border-blue-500 bg-blue-50/80 shadow-lg'
                           : 'border-gray-200 bg-white/50 hover:border-blue-300'
@@ -794,7 +794,7 @@ export default function Booking() {
                       type="date"
                       value={paymentData.date}
                       onChange={(e) => setPaymentData({...paymentData, date: e.target.value})}
-                      className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                      className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                     />
                   </div>
                   
@@ -807,7 +807,7 @@ export default function Booking() {
                       type="number"
                       value={paymentData.amount}
                       onChange={(e) => setPaymentData({...paymentData, amount: parseFloat(e.target.value) || 0})}
-                      className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                      className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                       placeholder={language === 'ar' ? 'أدخل المبلغ' : 'Enter amount'}
                     />
                   </div>
@@ -823,7 +823,7 @@ export default function Booking() {
                           type="date"
                           value={paymentData.startDate || ''}
                           onChange={(e) => setPaymentData({...paymentData, startDate: e.target.value})}
-                          className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                          className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                         />
                       </div>
                       
@@ -835,7 +835,7 @@ export default function Booking() {
                           type="date"
                           value={paymentData.completionDate || ''}
                           onChange={(e) => setPaymentData({...paymentData, completionDate: e.target.value})}
-                          className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                          className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                         />
                       </div>
                       
@@ -855,7 +855,7 @@ export default function Booking() {
                               remainingBalance: remaining > 0 ? remaining : 0
                             });
                           }}
-                          className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                          className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                           placeholder={language === 'ar' ? 'أدخل المبلغ المدفوع اليوم' : 'Enter amount paid today'}
                         />
                       </div>
@@ -949,7 +949,7 @@ export default function Booking() {
               <div className="flex justify-center mt-6">
                 <button
                   onClick={handleConfirmBooking}
-                  className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
+                  className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg"
                 >
                   {language === 'ar' ? 'تأكيد الحجز' : 'Confirm Booking'}
                 </button>
@@ -974,7 +974,7 @@ export default function Booking() {
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   >
                     <option value="">{language === 'ar' ? 'جميع الحالات' : 'All Statuses'}</option>
                     <option value="pending">{language === 'ar' ? 'في الانتظار' : 'Pending'}</option>
@@ -992,7 +992,7 @@ export default function Booking() {
                     type="date"
                     value={dateRangeFilter.start}
                     onChange={(e) => setDateRangeFilter({...dateRangeFilter, start: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   />
                 </div>
                 
@@ -1004,7 +1004,7 @@ export default function Booking() {
                     type="date"
                     value={dateRangeFilter.end}
                     onChange={(e) => setDateRangeFilter({...dateRangeFilter, end: e.target.value})}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
                   />
                 </div>
               </div>
@@ -1052,7 +1052,7 @@ export default function Booking() {
                       </tr>
                     ) : (
                       filteredBookings.map((booking) => (
-                        <tr key={booking.id} className="hover:bg-white/30 transition-all duration-200">
+                        <tr key={booking.id} className="hover:bg-white/30">
                           <td className="px-4 py-3 text-sm font-medium text-gray-900">
                             {booking.resId}
                           </td>

@@ -69,7 +69,7 @@ interface Booking {
 }
 
 export default function Guests() {
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const { t, isRTL, textAlignClass } = useTranslation();
   const [guests, setGuests] = useState<Guest[]>([]);
   const [hotels, setHotels] = useState<Hotel[]>([]);
@@ -382,7 +382,7 @@ export default function Guests() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-green-400/20 to-teal-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-pink-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-pink-400/10 to-orange-400/10 rounded-full blur-3xl" style={{transform: 'translate(-50%, -50%)'}}></div>
       </div>
 
       {/* Main content container */}
@@ -413,7 +413,7 @@ export default function Guests() {
               {/* Language Toggle */}
               <button
                 onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:shadow-lg transition-all duration-200"
+                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl"
               >
                 {language === 'ar' ? 'English' : 'العربية'}
               </button>
@@ -459,21 +459,21 @@ export default function Guests() {
                 placeholder={language === 'ar' ? 'البحث بالاسم، البريد الإلكتروني، الهاتف، أو رقم الملف...' : 'Search by name, email, phone, or profile ID...'}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               />
             </div>
             
             <div className="flex gap-2">
               <button
                 onClick={() => setViewMode(viewMode === 'table' ? 'cards' : 'table')}
-                className="px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl hover:bg-white/70 transition-all duration-200"
+                className="px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl hover:bg-white/70"
               >
                 {viewMode === 'table' ? '👥' : '📋'}
               </button>
               
               <button
                 onClick={exportToCSV}
-                className="px-4 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-all duration-200"
+                className="px-4 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600"
               >
                 {language === 'ar' ? 'تصدير' : 'Export'}
               </button>
@@ -489,7 +489,7 @@ export default function Guests() {
               <select
                 value={nationalityFilter}
                 onChange={(e) => setNationalityFilter(e.target.value)}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               >
                 <option value="">{language === 'ar' ? 'جميع الجنسيات' : 'All Nationalities'}</option>
                 {Array.from(new Set(guests.map(g => g.nationality))).map((nationality) => (
@@ -613,7 +613,7 @@ export default function Guests() {
                     </tr>
                   ) : (
                     paginatedGuests.map((guest) => (
-                      <tr key={guest.id} className="hover:bg-white/30 transition-all duration-200">
+                      <tr key={guest.id} className="hover:bg-white/30">
                         <td className="px-4 py-3">
                           <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold">
@@ -703,7 +703,7 @@ export default function Guests() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {paginatedGuests.map((guest) => (
-                <div key={guest.id} className="bg-white/70 border border-white/30 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-200">
+                <div key={guest.id} className="bg-white/70 border border-white/30 rounded-xl p-6 shadow-lg hover:shadow-xl">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">
                       {guest.fullName.charAt(0)}
@@ -745,7 +745,7 @@ export default function Guests() {
                         setIsEditing(false);
                         setShowGuestModal(true);
                       }}
-                      className="flex-1 px-3 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors"
+                      className="flex-1 px-3 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600"
                     >
                       {language === 'ar' ? 'عرض' : 'View'}
                     </button>
@@ -755,7 +755,7 @@ export default function Guests() {
                         setIsEditing(true);
                         setShowGuestModal(true);
                       }}
-                      className="flex-1 px-3 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors"
+                      className="flex-1 px-3 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600"
                     >
                       {language === 'ar' ? 'تعديل' : 'Edit'}
                     </button>
@@ -779,7 +779,7 @@ export default function Guests() {
                 <button
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70 transition-colors"
+                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70"
                 >
                   {language === 'ar' ? 'السابق' : 'Previous'}
                 </button>
@@ -791,7 +791,7 @@ export default function Guests() {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`px-3 py-2 rounded-lg transition-colors ${
+                      className={`px-3 py-2 rounded-lg ${
                         currentPage === page
                           ? 'bg-blue-500 text-white'
                           : 'bg-white/50 border border-gray-200/50 hover:bg-white/70'
@@ -805,7 +805,7 @@ export default function Guests() {
                 <button
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70 transition-colors"
+                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70"
                 >
                   {language === 'ar' ? 'التالي' : 'Next'}
                 </button>
@@ -912,14 +912,14 @@ export default function Guests() {
               <div className="flex justify-end space-x-4 mt-8">
                 <button
                   onClick={() => setShowGuestModal(false)}
-                  className="px-6 py-2 bg-gray-500 text-white rounded-xl hover:bg-gray-600 transition-colors"
+                  className="px-6 py-2 bg-gray-500 text-white rounded-xl hover:bg-gray-600"
                 >
                   {language === 'ar' ? 'إغلاق' : 'Close'}
                 </button>
                 {!isEditing && (
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="px-6 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors"
+                    className="px-6 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
                   >
                     {language === 'ar' ? 'تعديل' : 'Edit'}
                   </button>
@@ -930,7 +930,7 @@ export default function Guests() {
                       // Save logic would go here
                       setIsEditing(false);
                     }}
-                    className="px-6 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors"
+                    className="px-6 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600"
                   >
                     {language === 'ar' ? 'حفظ' : 'Save'}
                   </button>

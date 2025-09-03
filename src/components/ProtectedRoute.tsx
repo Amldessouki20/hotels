@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requiredRole?: 'OWNER' | 'STAFF';
+  requiredRole?: 'ADMIN' | 'STAFF';
   fallback?: ReactNode;
 }
 
@@ -63,7 +63,7 @@ export function ProtectedRoute({
 // Higher-order component version for easier usage
 export function withAuth<P extends object>(
   Component: React.ComponentType<P>,
-  requiredRole?: 'OWNER' | 'STAFF'
+  requiredRole?: 'ADMIN' | 'STAFF'
 ) {
   return function AuthenticatedComponent(props: P) {
     return (

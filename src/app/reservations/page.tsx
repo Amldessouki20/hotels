@@ -64,7 +64,7 @@ interface Booking {
 }
 
 export default function Reservations() {
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
   const { t, isRTL, textAlignClass } = useTranslation();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [hotels, setHotels] = useState<Hotel[]>([]);
@@ -245,7 +245,7 @@ export default function Reservations() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-green-400/20 to-teal-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-pink-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-pink-400/10 to-orange-400/10 rounded-full blur-3xl" style={{transform: 'translate(-50%, -50%)'}}></div>
       </div>
 
       {/* Main content container */}
@@ -263,7 +263,7 @@ export default function Reservations() {
             {/* Language Toggle */}
             <button
               onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
-              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl hover:shadow-lg transition-all duration-200"
+              className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl"
             >
               {language === 'ar' ? 'English' : 'العربية'}
             </button>
@@ -316,21 +316,21 @@ export default function Reservations() {
                 placeholder={language === 'ar' ? 'البحث بالاسم، رقم الحجز، أو الهاتف...' : 'Search by name, reservation ID, or phone...'}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               />
             </div>
             
             <div className="flex gap-2">
               <button
                 onClick={() => setViewMode(viewMode === 'table' ? 'cards' : 'table')}
-                className="px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl hover:bg-white/70 transition-all duration-200"
+                className="px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl hover:bg-white/70"
               >
                 {viewMode === 'table' ? '📋' : '📊'}
               </button>
               
               <button
                 onClick={exportToCSV}
-                className="px-4 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-all duration-200"
+                className="px-4 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600"
               >
                 {language === 'ar' ? 'تصدير' : 'Export'}
               </button>
@@ -346,7 +346,7 @@ export default function Reservations() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               >
                 <option value="">{language === 'ar' ? 'جميع الحالات' : 'All Statuses'}</option>
                 <option value="pending">{language === 'ar' ? 'في الانتظار' : 'Pending'}</option>
@@ -364,7 +364,7 @@ export default function Reservations() {
               <select
                 value={hotelFilter}
                 onChange={(e) => setHotelFilter(e.target.value)}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               >
                 <option value="">{language === 'ar' ? 'جميع الفنادق' : 'All Hotels'}</option>
                 {hotels.map((hotel) => (
@@ -383,7 +383,7 @@ export default function Reservations() {
                 type="date"
                 value={dateRangeFilter.start}
                 onChange={(e) => setDateRangeFilter({...dateRangeFilter, start: e.target.value})}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               />
             </div>
             
@@ -395,7 +395,7 @@ export default function Reservations() {
                 type="date"
                 value={dateRangeFilter.end}
                 onChange={(e) => setDateRangeFilter({...dateRangeFilter, end: e.target.value})}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               />
             </div>
             
@@ -410,7 +410,7 @@ export default function Reservations() {
                   setSortBy(field as any);
                   setSortOrder(order as any);
                 }}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
               >
                 <option value="date-desc">{language === 'ar' ? 'التاريخ (الأحدث)' : 'Date (Newest)'}</option>
                 <option value="date-asc">{language === 'ar' ? 'التاريخ (الأقدم)' : 'Date (Oldest)'}</option>
@@ -431,19 +431,19 @@ export default function Reservations() {
               <div className="flex gap-2">
                 <button
                   onClick={() => handleBulkStatusChange('confirmed')}
-                  className="px-3 py-1 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors"
+                  className="px-3 py-1 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600"
                 >
                   {language === 'ar' ? 'تأكيد' : 'Confirm'}
                 </button>
                 <button
                   onClick={() => handleBulkStatusChange('cancelled')}
-                  className="px-3 py-1 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors"
+                  className="px-3 py-1 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600"
                 >
                   {language === 'ar' ? 'إلغاء' : 'Cancel'}
                 </button>
                 <button
                   onClick={() => setSelectedBookings([])}
-                  className="px-3 py-1 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors"
+                  className="px-3 py-1 bg-gray-500 text-white text-sm rounded-lg hover:bg-gray-600"
                 >
                   {language === 'ar' ? 'إلغاء التحديد' : 'Clear'}
                 </button>
@@ -514,7 +514,7 @@ export default function Reservations() {
                     </tr>
                   ) : (
                     paginatedBookings.map((booking) => (
-                      <tr key={booking.id} className="hover:bg-white/30 transition-all duration-200">
+                      <tr key={booking.id} className="hover:bg-white/30">
                         <td className="px-4 py-3">
                           <input
                             type="checkbox"
@@ -620,7 +620,7 @@ export default function Reservations() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {paginatedBookings.map((booking) => (
-                <div key={booking.id} className="bg-white/70 border border-white/30 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-200">
+                <div key={booking.id} className="bg-white/70 border border-white/30 rounded-xl p-6 shadow-lg hover:shadow-xl">
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="font-semibold text-gray-800">{booking.guest.fullName}</h3>
@@ -650,7 +650,7 @@ export default function Reservations() {
                         // Add view functionality here
                         console.log('View booking:', booking.id);
                       }}
-                      className="flex-1 px-3 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors"
+                      className="flex-1 px-3 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600"
                     >
                       {language === 'ar' ? 'عرض' : 'View'}
                     </button>
@@ -660,7 +660,7 @@ export default function Reservations() {
                         console.log('Edit reservation:', booking.id);
                         alert(`Editing reservation ${booking.resId}`);
                       }}
-                      className="flex-1 px-3 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600 transition-colors"
+                      className="flex-1 px-3 py-2 bg-green-500 text-white text-sm rounded-lg hover:bg-green-600"
                     >
                       {language === 'ar' ? 'تعديل' : 'Edit'}
                     </button>
@@ -684,7 +684,7 @@ export default function Reservations() {
                 <button
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70 transition-colors"
+                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70"
                 >
                   {language === 'ar' ? 'السابق' : 'Previous'}
                 </button>
@@ -696,7 +696,7 @@ export default function Reservations() {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`px-3 py-2 rounded-lg transition-colors ${
+                      className={`px-3 py-2 rounded-lg ${
                         currentPage === page
                           ? 'bg-blue-500 text-white'
                           : 'bg-white/50 border border-gray-200/50 hover:bg-white/70'
@@ -710,7 +710,7 @@ export default function Reservations() {
                 <button
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70 transition-colors"
+                  className="px-3 py-2 bg-white/50 border border-gray-200/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/70"
                 >
                   {language === 'ar' ? 'التالي' : 'Next'}
                 </button>

@@ -12,12 +12,17 @@ export interface LoginCredentials {
 export interface AuthUser {
   id: string;
   username: string;
-  email: string;
-  role: 'OWNER' | 'STAFF';
-  firstName?: string | null;
-  lastName?: string | null;
+  email: string | null;
+  groupId: string;
+  group: {
+    id: string;
+    name: string;
+    description: string | null;
+  };
+  fullName?: string | null;
   phone?: string | null;
   isActive: boolean;
+  role?: string; // Added role property for compatibility
 }
 
 export interface AuthResponse {
@@ -42,9 +47,15 @@ export async function authenticateUser(credentials: LoginCredentials): Promise<A
         username: true,
         email: true,
         password: true,
-        role: true,
-        firstName: true,
-        lastName: true,
+        groupId: true,
+        group: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+          },
+        },
+        fullName: true,
         phone: true,
         isActive: true,
       },
@@ -79,7 +90,8 @@ export async function authenticateUser(credentials: LoginCredentials): Promise<A
       userId: user.id,
       username: user.username,
       email: user.email,
-      role: user.role,
+      groupId: user.groupId,
+      groupName: user.group.name,
     };
 
     const token = generateToken(tokenPayload);
@@ -89,9 +101,9 @@ export async function authenticateUser(credentials: LoginCredentials): Promise<A
       id: user.id,
       username: user.username,
       email: user.email,
-      role: user.role,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      groupId: user.groupId,
+      group: user.group,
+      fullName: user.fullName,
       phone: user.phone,
       isActive: user.isActive,
     };
@@ -122,9 +134,15 @@ export async function getUserById(userId: string): Promise<AuthUser | null> {
         id: true,
         username: true,
         email: true,
-        role: true,
-        firstName: true,
-        lastName: true,
+        groupId: true,
+        group: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+          },
+        },
+        fullName: true,
         phone: true,
         isActive: true,
       },
@@ -167,9 +185,9 @@ export async function createStaffUser(userData: {
   username: string;
   email: string;
   password: string;
-  firstName?: string;
-  lastName?: string;
+  fullName?: string;
   phone?: string;
+  groupId?: string;
 }): Promise<AuthResponse> {
   try {
     // Check if username or email already exists
@@ -189,6 +207,26 @@ export async function createStaffUser(userData: {
       };
     }
 
+    // Find default staff group if no groupId provided
+    let groupId = userData.groupId;
+    if (!groupId) {
+      const staffGroup = await prisma.userGroup.findFirst({
+        where: {
+          name: { contains: 'Staff', mode: 'insensitive' },
+          isActive: true,
+        },
+      });
+      
+      if (!staffGroup) {
+        return {
+          success: false,
+          message: 'No staff group found. Please contact administrator.',
+        };
+      }
+      
+      groupId = staffGroup.id;
+    }
+
     // Hash password
     const hashedPassword = await bcrypt.hash(userData.password, 10);
 
@@ -198,9 +236,8 @@ export async function createStaffUser(userData: {
         username: userData.username,
         email: userData.email,
         password: hashedPassword,
-        role: 'STAFF',
-        firstName: userData.firstName,
-        lastName: userData.lastName,
+        groupId: groupId,
+        fullName: userData.fullName,
         phone: userData.phone,
         isActive: true,
       },
@@ -208,9 +245,15 @@ export async function createStaffUser(userData: {
         id: true,
         username: true,
         email: true,
-        role: true,
-        firstName: true,
-        lastName: true,
+        groupId: true,
+        group: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+          },
+        },
+        fullName: true,
         phone: true,
         isActive: true,
       },
@@ -252,16 +295,22 @@ export async function updateUserStatus(userId: string, isActive: boolean): Promi
 export async function getAllStaffUsers(): Promise<AuthUser[]> {
   try {
     const users = await prisma.user.findMany({
-      where: { role: 'STAFF' },
+      where: { isActive: true },
       select: {
         id: true,
         username: true,
         email: true,
-        role: true,
-        firstName: true,
-        lastName: true,
+        fullName: true,
         phone: true,
         isActive: true,
+        groupId: true,
+        group: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+          },
+        },
       },
       orderBy: { createdAt: 'desc' },
     });

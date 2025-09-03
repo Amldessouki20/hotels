@@ -272,7 +272,7 @@ export default function Hotel() {
   const handleDeleteSelected = async () => {
     if (selectedHotels.length === 0) return;
     
-    if (!confirm(t('hotels.confirmDeleteSelectedHotels', { count: selectedHotels.length }))) {
+    if (!confirm(t('hotels.confirmDeleteSelectedHotels').replace('{{count}}', selectedHotels.length.toString()))) {
       return;
     }
 
@@ -338,13 +338,13 @@ export default function Hotel() {
   };
 
   return (
-    <ProtectedRoute requiredRole="OWNER">
+    <ProtectedRoute requiredRole="ADMIN">
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-6 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-apple-blue/20 to-apple-purple/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-apple-green/20 to-apple-teal/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-apple-pink/10 to-apple-orange/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-apple-pink/10 to-apple-orange/10 rounded-full blur-3xl" style={{transform: 'translate(-50%, -50%)'}}></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-8">
@@ -399,7 +399,7 @@ export default function Hotel() {
                   type="text"
                   value={hotelName}
                   onChange={(e) => setHotelName(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                   placeholder={t('hotels.enterHotelName')}
                   required
                 />
@@ -414,7 +414,7 @@ export default function Hotel() {
                   type="text"
                   value={hotelCode}
                   onChange={(e) => setHotelCode(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                   placeholder={t('hotels.enterHotelCode')}
                   required
                 />
@@ -429,7 +429,7 @@ export default function Hotel() {
                   type="text"
                   value={altHotelName}
                   onChange={(e) => setAltHotelName(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                   placeholder={t('hotels.enterAltName')}
                   required
                 />
@@ -445,7 +445,7 @@ export default function Hotel() {
                 type="text"
                 value={hotelAddress}
                 onChange={(e) => setHotelAddress(e.target.value)}
-                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                 placeholder={t('hotels.enterHotelAddress')}
                 required
               />
@@ -462,7 +462,7 @@ export default function Hotel() {
                   value={hotelDescription}
                   onChange={(e) => setHotelDescription(e.target.value)}
                   rows={4}
-                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400 resize-none"
+                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400 resize-none"
                   placeholder={t('hotels.enterHotelDescription')}
                 />
               </div>
@@ -476,7 +476,7 @@ export default function Hotel() {
                   value={altHotelDescription}
                   onChange={(e) => setAltHotelDescription(e.target.value)}
                   rows={4}
-                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400 resize-none"
+                  className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400 resize-none"
                   placeholder={t('hotels.enterAltHotelDescription')}
                 />
               </div>
@@ -486,7 +486,7 @@ export default function Hotel() {
             <div className="flex justify-end space-x-4">
               <button
                 type="button"
-                className="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-200 font-medium"
+                className="px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 font-medium"
                 onClick={editingHotel ? handleCancelEdit : () => {
                   setHotelName('');
                   setHotelCode('');
@@ -501,7 +501,7 @@ export default function Hotel() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-3 bg-gradient-to-r from-apple-blue to-apple-purple text-white rounded-xl hover:from-apple-blue/90 hover:to-apple-purple/90 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="px-8 py-3 bg-gradient-to-r from-apple-blue to-apple-purple text-white rounded-xl hover:from-apple-blue/90 hover:to-apple-purple/90 font-medium shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <div className="flex items-center space-x-2">
@@ -543,7 +543,7 @@ export default function Hotel() {
                       type="text"
                       value={nameFilter}
                       onChange={(e) => setNameFilter(e.target.value)}
-                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                       placeholder={t('hotels.searchByName')}
                     />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -564,7 +564,7 @@ export default function Hotel() {
                       type="text"
                       value={codeFilter}
                       onChange={(e) => setCodeFilter(e.target.value)}
-                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                       placeholder={t('hotels.searchByCode')}
                     />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -583,13 +583,13 @@ export default function Hotel() {
                 <div className="flex gap-2 pt-2">
                   <button
                     onClick={handleDeleteSelected}
-                    className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                    className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm rounded-lg hover:shadow-md"
                   >
                     {`${t('hotels.deleteSelected')} (${selectedHotels.length})`}
                   </button>
                   <button
                     onClick={handlePrintSelected}
-                    className="px-4 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                    className="px-4 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-lg hover:shadow-md"
                   >
                     {`${t('hotels.printSelected')} (${selectedHotels.length})`}
                   </button>
@@ -646,7 +646,7 @@ export default function Hotel() {
                  </thead>
                  <tbody>
                  {filteredHotels.map((hotel) => (
-                   <tr key={hotel.id} className={`border-b border-gray-100/50 hover:bg-white/30 transition-colors ${
+                   <tr key={hotel.id} className={`border-b border-gray-100/50 hover:bg-white/30 ${
                      selectedHotels.includes(hotel.id) ? 'bg-apple-blue/10' : ''
                    }`}>
                      <td className="py-4 px-4">
@@ -675,25 +675,25 @@ export default function Hotel() {
                        <div className="flex space-x-2">
                          <button
                            onClick={() => handleViewHotel(hotel.id)}
-                           className="px-3 py-1 bg-gradient-to-r from-apple-blue to-apple-purple text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                           className="px-3 py-1 bg-gradient-to-r from-apple-blue to-apple-purple text-white text-sm rounded-lg hover:shadow-md"
                          >
                            {t('common.view')}
                          </button>
                          <button
                            onClick={() => handleEditHotel(hotel.id)}
-                           className="px-3 py-1 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                           className="px-3 py-1 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-sm rounded-lg hover:shadow-md"
                          >
                            {t('common.edit')}
                          </button>
                          <button
                            onClick={() => handleDeleteHotel(hotel.id)}
-                           className="px-3 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                           className="px-3 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm rounded-lg hover:shadow-md"
                          >
                            {t('common.delete')}
                          </button>
                          <button
                            onClick={handlePrint}
-                           className="px-3 py-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                           className="px-3 py-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-lg hover:shadow-md"
                          >
                            {t('hotels.print')}
                          </button>
@@ -733,7 +733,7 @@ export default function Hotel() {
                  </h3>
                  <button
                    onClick={() => setSelectedHotelDetails(null)}
-                   className="p-2 hover:bg-gray-100/50 rounded-xl transition-colors"
+                   className="p-2 hover:bg-gray-100/50 rounded-xl"
                  >
                    <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -783,7 +783,7 @@ export default function Hotel() {
                  <div className="flex gap-4 pt-4">
                    <button
                      onClick={() => handleEditHotel(selectedHotelDetails.id)}
-                     className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
+                     className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl"
                    >
                      {t('common.edit')}
                    </button>
@@ -792,13 +792,13 @@ export default function Hotel() {
                        handleDeleteHotel(selectedHotelDetails.id);
                        setSelectedHotelDetails(null);
                      }}
-                     className="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
+                     className="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl"
                    >
                      {t('common.delete')}
                    </button>
                    <button
                      onClick={handlePrint}
-                     className="px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
+                     className="px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl"
                    >
                      {t('hotels.print')}
                    </button>
@@ -809,8 +809,8 @@ export default function Hotel() {
          )}
 
         {/* Floating elements for extra visual appeal */}
-        <div className="absolute -top-6 -left-6 w-12 h-12 bg-gradient-to-br from-apple-pink/30 to-apple-orange/30 rounded-full blur-sm animate-pulse"></div>
-        <div className="absolute -bottom-6 -right-6 w-8 h-8 bg-gradient-to-br from-apple-green/30 to-apple-teal/30 rounded-full blur-sm animate-pulse delay-1000"></div>
+        <div className="absolute -top-6 -left-6 w-12 h-12 bg-gradient-to-br from-apple-pink/30 to-apple-orange/30 rounded-full blur-sm"></div>
+        <div className="absolute -bottom-6 -right-6 w-8 h-8 bg-gradient-to-br from-apple-green/30 to-apple-teal/30 rounded-full blur-sm"></div>
       </div>
       </div>
     </ProtectedRoute>

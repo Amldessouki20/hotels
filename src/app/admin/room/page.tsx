@@ -204,13 +204,13 @@ export default function Room() {
   };
 
   return (
-    <ProtectedRoute requiredRole="OWNER">
+    <ProtectedRoute requiredRole="ADMIN">
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-apple-blue/20 to-apple-purple/20 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-apple-green/20 to-apple-teal/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-apple-pink/10 to-apple-orange/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-apple-pink/10 to-apple-orange/10 rounded-full blur-3xl" style={{transform: 'translate(-50%, -50%)'}}></div>
       </div>
 
       {/* Main content container */}
@@ -238,7 +238,7 @@ export default function Room() {
                   <select
                     value={hotelId}
                     onChange={(e) => setHotelId(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm"
                     required
                   >
                     <option value="">{t('rooms.selectHotel')}</option>
@@ -257,7 +257,7 @@ export default function Room() {
                     type="text"
                     value={roomType}
                     onChange={(e) => setRoomType(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                     placeholder={t('rooms.enterRoomType')}
                     required
                   />
@@ -271,7 +271,7 @@ export default function Room() {
                   <select
                     value={boardType}
                     onChange={(e) => setBoardType(e.target.value as any)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm"
                   >
                     <option value="Room only">{t('rooms.roomOnly')}</option>
                     <option value="Bed & breakfast">{t('rooms.bedBreakfast')}</option>
@@ -289,7 +289,7 @@ export default function Room() {
                     type="text"
                     value={roomTypeDescription}
                     onChange={(e) => setRoomTypeDescription(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                     placeholder={t('rooms.enterRoomDescription')}
                     required
                   />
@@ -304,7 +304,7 @@ export default function Room() {
                     type="text"
                     value={altDescription}
                     onChange={(e) => setAltDescription(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                     placeholder={t('rooms.enterAltDescription')}
                     required
                   />
@@ -318,7 +318,7 @@ export default function Room() {
                     type="number"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                    className="w-full px-4 py-3 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                     placeholder={t('rooms.roomQuantityPlaceholder')}
                     min="1"
                     required
@@ -340,7 +340,7 @@ export default function Room() {
                         type="number"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        className="w-full px-4 py-4 bg-white/70 border border-gray-200/60 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-300 backdrop-blur-sm placeholder-gray-400 text-lg font-medium shadow-sm hover:shadow-md"
+                        className="w-full px-4 py-4 bg-white/70 border border-gray-200/60 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400 text-lg font-medium shadow-sm"
                         placeholder={t('rooms.enterBasePrice')}
                         min="0"
                         step="0.01"
@@ -356,14 +356,14 @@ export default function Room() {
 
                   {/* Alternative Price Toggle */}
                   <div className="border-t border-gray-200/50 pt-4 w-full">
-                    <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl border border-gray-200/40 hover:bg-white/60 transition-all duration-200 w-full">
+                    <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl border border-gray-200/40 hover:bg-white/60 w-full">
                       <div className="flex items-center gap-3">
                         <input
                           type="checkbox"
                           id="hasAlternativePrice"
                           checked={hasAlternativePrice}
                           onChange={(e) => setHasAlternativePrice(e.target.checked)}
-                          className="w-5 h-5 text-apple-blue bg-white/80 border-gray-300 rounded-md focus:ring-apple-blue focus:ring-2 transition-all duration-200"
+                          className="w-5 h-5 text-apple-blue bg-white/80 border-gray-300 rounded-md focus:ring-apple-blue focus:ring-2"
                         />
                         <label htmlFor="hasAlternativePrice" className="text-sm font-semibold text-gray-700 cursor-pointer">
                           {t('rooms.enableAlternativePrice')}
@@ -375,7 +375,7 @@ export default function Room() {
                     </div>
                     
                     {/* Alternative Price Input */}
-                    <div className={`transition-all duration-300 ease-in-out overflow-hidden w-full SAR {
+                    <div className={`overflow-hidden w-full ${
                       hasAlternativePrice ? 'max-h-40 opacity-100 mt-4' : 'max-h-0 opacity-0'
                     }`}>
                       <div className="space-y-3 w-full">
@@ -388,7 +388,7 @@ export default function Room() {
                             type="number"
                             value={alternativePrice}
                             onChange={(e) => setAlternativePrice(e.target.value)}
-                            className="w-full px-4 py-4 bg-orange-50/70 border border-orange-200/60 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all duration-300 backdrop-blur-sm placeholder-orange-400 text-lg font-medium shadow-sm hover:shadow-md"
+                            className="w-full px-4 py-4 bg-orange-50/70 border border-orange-200/60 rounded-xl focus:ring-2 focus:ring-orange-400 focus:border-transparent backdrop-blur-sm placeholder-orange-400 text-lg font-medium shadow-sm"
                             placeholder={t('rooms.enterAlternativePrice')}
                             min="0"
                             step="0.01"
@@ -416,7 +416,7 @@ export default function Room() {
               <div className="flex flex-wrap gap-3">
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-apple-green to-apple-green-light text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 focus:ring-2 focus:ring-apple-green focus:ring-offset-2"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-apple-green to-apple-green-light text-white font-semibold rounded-xl shadow-lg focus:ring-2 focus:ring-apple-green focus:ring-offset-2"
                 >
                   {t('rooms.addRoom')}
                 </button>
@@ -446,7 +446,7 @@ export default function Room() {
                       type="text"
                       value={nameFilter}
                       onChange={(e) => setNameFilter(e.target.value)}
-                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                       placeholder={t('rooms.searchRoomOrHotel')}
                     />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -467,7 +467,7 @@ export default function Room() {
                       type="text"
                       value={typeFilter}
                       onChange={(e) => setTypeFilter(e.target.value)}
-                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent transition-all duration-200 backdrop-blur-sm placeholder-gray-400"
+                      className="w-full px-4 py-3 pl-10 bg-white/50 border border-gray-200/50 rounded-xl focus:ring-2 focus:ring-apple-blue focus:border-transparent backdrop-blur-sm placeholder-gray-400"
                       placeholder={t('rooms.searchRoomType')}
                     />
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -482,13 +482,13 @@ export default function Room() {
                 <div className="flex gap-2">
                   <button
                     onClick={handleDeleteAll}
-                    className="px-4 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+                    className="px-4 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white text-sm rounded-xl font-semibold shadow-lg focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
                   >
                     {t('rooms.deleteAll')}
                   </button>
                   <button
                     onClick={handlePrintAll}
-                    className="px-4 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200 focus:ring-2 focus:ring-gray-600 focus:ring-offset-2"
+                    className="px-4 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-xl font-semibold shadow-lg focus:ring-2 focus:ring-gray-600 focus:ring-offset-2"
                   >
                     {t('rooms.printAll')}
                   </button>
@@ -500,13 +500,13 @@ export default function Room() {
                 <div className="flex gap-2 pt-2">
                   <button
                     onClick={handleDeleteSelected}
-                    className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                    className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm rounded-lg"
                   >
                     {t('rooms.deleteSelected')} ({selectedRooms.length})
                   </button>
                   <button
                     onClick={handlePrintSelected}
-                    className="px-4 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-lg hover:shadow-md transition-all duration-200"
+                    className="px-4 py-2 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-sm rounded-lg"
                   >
                     {t('rooms.printSelected')} ({selectedRooms.length})
                   </button>
@@ -550,7 +550,7 @@ export default function Room() {
                   </thead>
                   <tbody>
                     {filteredRooms.map((room) => (
-                      <tr key={room.id} className="border-b border-gray-100/50 hover:bg-white/30 transition-colors">
+                      <tr key={room.id} className="border-b border-gray-100/50 hover:bg-white/30">
                         <td className="py-3 px-4">
                           <input
                             type="checkbox"
@@ -572,25 +572,25 @@ export default function Room() {
                           <div className="flex space-x-2">
                             <button
                               onClick={() => handleViewRoom(room.id)}
-                              className="px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs rounded-lg hover:shadow-md transition-all duration-200"
+                              className="px-3 py-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs rounded-lg"
                             >
                               {t('common.view')}
                             </button>
                             <button
                               onClick={() => handleEditRoom(room.id)}
-                              className="px-3 py-1 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs rounded-lg hover:shadow-md transition-all duration-200"
+                              className="px-3 py-1 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs rounded-lg"
                             >
                               {t('common.edit')}
                             </button>
                             <button
                               onClick={() => handleDeleteRoom(room.id)}
-                              className="px-3 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-lg hover:shadow-md transition-all duration-200"
+                              className="px-3 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-lg"
                             >
                               {t('common.delete')}
                             </button>
                             <button
                               onClick={() => handlePrintRoom(room.id)}
-                              className="px-3 py-1 bg-gradient-to-r from-gray-500 to-gray-600 text-white text-xs rounded-lg hover:shadow-md transition-all duration-200"
+                              className="px-3 py-1 bg-gradient-to-r from-gray-500 to-gray-600 text-white text-xs rounded-lg"
                             >
                               {t('common.print')}
                             </button>

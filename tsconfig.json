@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5", // Changed to es5 for broader compatibility
+    "target": "es2017", // Changed to es2017 for better compatibility with modern features
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "downlevelIteration": true, // Added to support Map iteration
     "baseUrl": ".", // Kept
     // "outDir": "./dist", // Removed, Next.js handles output
     // "rootDir": "src", // Removed, Next.js handles source structure

@@ -48,7 +48,7 @@ const LayoutWrapper = ({ children }: LayoutWrapperProps) => {
             <div className="flex items-center space-x-3">
               <button
                 onClick={toggleSidebar}
-                className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                className="p-2 rounded-lg hover:bg-gray-100"
               >
                 <Bars3Icon className="w-6 h-6" />
               </button>
