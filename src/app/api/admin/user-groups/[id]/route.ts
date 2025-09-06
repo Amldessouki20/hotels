@@ -15,11 +15,12 @@ const updateUserGroupSchema = z.object({
 // GET - جلب مجموعة واحدة مع تفاصيلها
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const group = await prisma.userGroup.findUnique({
-      where: { id: params.id },
+        where: { id },
       include: {
         users: {
           select: {
@@ -64,15 +65,16 @@ export async function GET(
 // PUT - تحديث مجموعة
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const body = await request.json();
     const validatedData = updateUserGroupSchema.parse(body);
 
     // التحقق من وجود المجموعة
     const existingGroup = await prisma.userGroup.findUnique({
-      where: { id: params.id }
+        where: { id }
     });
 
     if (!existingGroup) {
@@ -100,12 +102,12 @@ export async function PUT(
     const updatedGroup = await prisma.$transaction(async (tx) => {
       // حذف الصلاحيات الحالية
       await tx.groupPermission.deleteMany({
-        where: { groupId: params.id }
+        where: { groupId: id }
       });
 
       // تحديث المجموعة وإضافة الصلاحيات الجديدة
       return await tx.userGroup.update({
-        where: { id: params.id },
+        where: { id },
         data: {
           name: validatedData.name,
           description: validatedData.description,
@@ -149,12 +151,13 @@ export async function PUT(
 // DELETE - حذف مجموعة
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // التحقق من وجود المجموعة
-    const existingGroup = await prisma.userGroup.findUnique({
-      where: { id: params.id },
+    const group = await prisma.userGroup.findUnique({
+        where: { id },
       include: {
         _count: {
           select: {
@@ -164,7 +167,7 @@ export async function DELETE(
       }
     });
 
-    if (!existingGroup) {
+    if (!group) {
       return NextResponse.json(
         { error: 'المجموعة غير موجودة' },
         { status: 404 }
@@ -172,10 +175,10 @@ export async function DELETE(
     }
 
     // التحقق من عدم وجود مستخدمين في المجموعة
-    if (existingGroup._count.users > 0) {
+    if (group._count.users > 0) {
       return NextResponse.json(
         { 
-          error: `لا يمكن حذف المجموعة لأنها تحتوي على ${existingGroup._count.users} مستخدم. يرجى نقل المستخدمين إلى مجموعة أخرى أولاً.` 
+          error: `لا يمكن حذف المجموعة لأنها تحتوي على ${group._count.users} مستخدم. يرجى نقل المستخدمين إلى مجموعة أخرى أولاً.` 
         },
         { status: 400 }
       );
@@ -183,7 +186,7 @@ export async function DELETE(
 
     // حذف المجموعة (سيتم حذف الصلاحيات تلقائياً بسبب onDelete: Cascade)
     await prisma.userGroup.delete({
-      where: { id: params.id }
+      where: { id }
     });
 
     return NextResponse.json({ message: 'تم حذف المجموعة بنجاح' });

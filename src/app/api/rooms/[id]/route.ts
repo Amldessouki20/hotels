@@ -24,8 +24,9 @@ const updateRoomSchema = z.object({
 // GET /api/rooms/[id] - Fetch a specific room by ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // Verify authentication
     const token = request.cookies.get('auth-token')?.value;
@@ -44,7 +45,7 @@ export async function GET(
       );
     }
 
-    const roomId = params.id;
+    const roomId = id;
 
     // Fetch room with all related data
     const room = await prisma.room.findUnique({
@@ -135,8 +136,9 @@ export async function GET(
 // PUT /api/rooms/[id] - Update a specific room
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // Verify authentication
     const token = request.cookies.get('auth-token')?.value;
@@ -163,7 +165,7 @@ export async function PUT(
       );
     }
 
-    const roomId = params.id;
+    const roomId = id;
 
     // Check if room exists and get hotel info
     const existingRoom = await prisma.room.findUnique({
@@ -313,8 +315,9 @@ export async function PUT(
 // DELETE /api/rooms/[id] - Delete a specific room
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // Verify authentication
     const token = request.cookies.get('auth-token')?.value;
@@ -341,7 +344,7 @@ export async function DELETE(
       );
     }
 
-    const roomId = params.id;
+    const roomId = id;
 
     // Check if room exists and get hotel info
     const existingRoom = await prisma.room.findUnique({

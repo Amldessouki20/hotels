@@ -26,12 +26,13 @@ const bulkPermissionsSchema = z.object({
 // POST - إدارة صلاحيات المستخدم بشكل مجمع
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
@@ -47,7 +48,7 @@ export async function POST(
     );
   }
 
-    const userId = params.id;
+    const userId = id;
     const body = await request.json();
     const validatedData = bulkPermissionsSchema.parse(body);
 
@@ -216,21 +217,22 @@ export async function POST(
 }
 
 // GET - جلب ملخص صلاحيات المستخدم
-export async function GET(
+export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
       );
     }
 
-    const userId = params.id;
+    const userId = id;
 
     // جلب بيانات المستخدم مع صلاحياته
     const user = await prisma.user.findUnique({

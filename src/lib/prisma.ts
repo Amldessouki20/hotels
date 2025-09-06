@@ -15,3 +15,16 @@ if (process.env.NODE_ENV !== 'production') {
 process.on('beforeExit', async () => {
   await prisma.$disconnect();
 });
+
+/**
+ * Reset Prisma connection
+ */
+export async function resetPrismaConnection(): Promise<void> {
+  try {
+    await prisma.$disconnect();
+    await prisma.$connect();
+  } catch (error) {
+    console.error('Error resetting Prisma connection:', error);
+    throw error;
+  }
+}

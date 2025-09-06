@@ -283,7 +283,7 @@ export default function RoomForm({ isOpen, onClose, onSubmit, initialData, isEdi
             {/* Board Type */}
             <div>
               <Label htmlFor="boardType">نوع الإقامة *</Label>
-              <Select value={formData.boardType} onValueChange={value => handleInputChange("boardType", value)}>
+              <Select value={formData.boardType} onValueChange={(value: string) => handleInputChange("boardType", value)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -325,7 +325,7 @@ export default function RoomForm({ isOpen, onClose, onSubmit, initialData, isEdi
               <Switch
                 id="isActive"
                 checked={formData.isActive}
-                onCheckedChange={checked => handleInputChange("isActive", checked)}
+                onCheckedChange={(checked: boolean) => handleInputChange("isActive", checked)}
               />
               <Label htmlFor="isActive">نشط</Label>
             </div>

@@ -26,8 +26,8 @@ export async function GET(
 ) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
@@ -108,8 +108,8 @@ export async function PUT(
 ) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
@@ -235,8 +235,8 @@ export async function DELETE(
 ) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
@@ -277,7 +277,7 @@ export async function DELETE(
     }
 
     // منع حذف المستخدم الحالي
-    if (authResult.user.id === userId) {
+    if (authUser.id === userId) {
       return NextResponse.json(
         { error: 'لا يمكنك حذف حسابك الخاص' },
         { status: 400 }

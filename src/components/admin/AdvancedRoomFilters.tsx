@@ -165,7 +165,7 @@ export default function AdvancedRoomFilters({ isOpen, onClose, onApplyFilters, c
 
             <div>
               <Label htmlFor="hotelId">الفندق</Label>
-              <Select value={filters.hotelId || ''} onValueChange={(value) => handleFilterChange('hotelId', value || undefined)}>
+              <Select value={filters.hotelId || ''} onValueChange={(value: string) => handleFilterChange('hotelId', value || undefined)}>
                 <SelectTrigger>
                   <SelectValue placeholder="جميع الفنادق" />
                 </SelectTrigger>
@@ -195,7 +195,7 @@ export default function AdvancedRoomFilters({ isOpen, onClose, onApplyFilters, c
 
             <div>
               <Label htmlFor="boardType">نوع الإقامة</Label>
-              <Select value={filters.boardType || ''} onValueChange={(value) => handleFilterChange('boardType', value || undefined)}>
+              <Select value={filters.boardType || ''} onValueChange={(value: string) => handleFilterChange('boardType', value || undefined)}>
                 <SelectTrigger>
                   <SelectValue placeholder="جميع أنواع الإقامة" />
                 </SelectTrigger>
@@ -281,7 +281,7 @@ export default function AdvancedRoomFilters({ isOpen, onClose, onApplyFilters, c
               <Switch
                 id="isActive"
                 checked={filters.isActive ?? true}
-                onCheckedChange={(checked) => handleFilterChange('isActive', checked)}
+                onCheckedChange={(checked: boolean) => handleFilterChange('isActive', checked)}
               />
               <Label htmlFor="isActive">الغرف النشطة فقط</Label>
             </div>

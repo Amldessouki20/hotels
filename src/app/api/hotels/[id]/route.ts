@@ -3,15 +3,15 @@ import { prisma } from '@/lib/prisma';
 import { verifyToken } from '@/lib/jwt';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 // GET /api/hotels/[id] - Fetch hotel by ID
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Get authorization header
     const authHeader = request.headers.get('authorization');
@@ -94,7 +94,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 // PUT /api/hotels/[id] - Update hotel by ID
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Get authorization header
     const authHeader = request.headers.get('authorization');
@@ -235,7 +235,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 // DELETE /api/hotels/[id] - Delete hotel by ID
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     // Get authorization header
     const authHeader = request.headers.get('authorization');

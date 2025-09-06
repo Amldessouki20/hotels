@@ -26,8 +26,8 @@ const importDataSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }

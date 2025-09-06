@@ -375,6 +375,54 @@ export interface Translations {
     copyright: string;
   };
   
+  // User management
+  userManagement: {
+    userDetails: string;
+    tabs: {
+      details: string;
+      permissions: string;
+    };
+    basicInfo: string;
+    noGroup: string;
+    securityInfo: string;
+    passwordStatus: string;
+    passwordExpired: string;
+    passwordValid: string;
+    passwordExpiry: string;
+    neverExpires: string;
+    expiresRegularly: string;
+    lastPasswordChange: string;
+    statistics: string;
+    userPermissions: string;
+    createdBookings: string;
+    salary: string;
+    noPermissions: string;
+    fromGroup: string;
+    direct: string;
+    managePermissions: string;
+    searchPermissions: string;
+    searchPermissionsPlaceholder: string;
+    module: string;
+    allModules: string;
+    currentPermissions: string;
+    availablePermissions: string;
+    adding: string;
+    removing: string;
+    pendingChanges: string;
+    errorSavingPermissions: string;
+  };
+  users: {
+    fullName: string;
+    username: string;
+    email: string;
+    phone: string;
+    status: string;
+    active: string;
+    inactive: string;
+    group: string;
+    createdAt: string;
+  };
+  
   // Error messages
   errors: {
     networkError: string;
@@ -783,6 +831,53 @@ const en: Translations = {
     copyright: '© 2024 Hotel Management System',
   },
   
+  userManagement: {
+    userDetails: 'User Details',
+    tabs: {
+      details: 'Details',
+      permissions: 'Permissions',
+    },
+    basicInfo: 'Basic Information',
+    noGroup: 'No Group',
+    securityInfo: 'Security Information',
+    passwordStatus: 'Password Status',
+    passwordExpired: 'Password Expired',
+    passwordValid: 'Password Valid',
+    passwordExpiry: 'Password Expiry',
+    neverExpires: 'Never Expires',
+    expiresRegularly: 'Expires Regularly',
+    lastPasswordChange: 'Last Password Change',
+    statistics: 'Statistics',
+    userPermissions: 'User Permissions',
+    createdBookings: 'Created Bookings',
+    salary: 'Salary',
+    noPermissions: 'No permissions assigned',
+    fromGroup: 'From Group',
+    direct: 'Direct',
+    managePermissions: 'Manage Permissions',
+    searchPermissions: 'Search Permissions',
+    searchPermissionsPlaceholder: 'Search permissions...',
+    module: 'Module',
+    allModules: 'All Modules',
+    currentPermissions: 'Current Permissions',
+    availablePermissions: 'Available Permissions',
+    adding: 'Adding',
+    removing: 'Removing',
+    pendingChanges: 'Pending Changes',
+    errorSavingPermissions: 'Error saving permissions',
+  },
+  users: {
+    fullName: 'Full Name',
+    username: 'Username',
+    email: 'Email',
+    phone: 'Phone',
+    status: 'Status',
+    active: 'Active',
+    inactive: 'Inactive',
+    group: 'Group',
+    createdAt: 'Created At',
+  },
+  
   errors: {
     networkError: 'Network error. Please check your connection.',
     serverError: 'Server error. Please try again later.',
@@ -1187,6 +1282,53 @@ const ar: Translations = {
     about: 'حول',
     version: 'الإصدار',
     copyright: '© 2024 نظام إدارة الفنادق',
+  },
+  
+  userManagement: {
+    userDetails: 'تفاصيل المستخدم',
+    tabs: {
+      details: 'التفاصيل',
+      permissions: 'الصلاحيات',
+    },
+    basicInfo: 'المعلومات الأساسية',
+    noGroup: 'لا توجد مجموعة',
+    securityInfo: 'معلومات الأمان',
+    passwordStatus: 'حالة كلمة المرور',
+    passwordExpired: 'كلمة المرور منتهية الصلاحية',
+    passwordValid: 'كلمة المرور صالحة',
+    passwordExpiry: 'انتهاء صلاحية كلمة المرور',
+    neverExpires: 'لا تنتهي صلاحيتها أبداً',
+    expiresRegularly: 'تنتهي صلاحيتها بانتظام',
+    lastPasswordChange: 'آخر تغيير لكلمة المرور',
+    statistics: 'الإحصائيات',
+    userPermissions: 'صلاحيات المستخدم',
+    createdBookings: 'الحجوزات المُنشأة',
+    salary: 'الراتب',
+    noPermissions: 'لا توجد صلاحيات مُعيّنة',
+    fromGroup: 'من المجموعة',
+    direct: 'مباشر',
+    managePermissions: 'إدارة الصلاحيات',
+    searchPermissions: 'البحث في الصلاحيات',
+    searchPermissionsPlaceholder: 'البحث في الصلاحيات...',
+    module: 'الوحدة',
+    allModules: 'جميع الوحدات',
+    currentPermissions: 'الصلاحيات الحالية',
+    availablePermissions: 'الصلاحيات المتاحة',
+    adding: 'إضافة',
+    removing: 'إزالة',
+    pendingChanges: 'التغييرات المعلقة',
+    errorSavingPermissions: 'خطأ في حفظ الصلاحيات',
+  },
+  users: {
+    fullName: 'الاسم الكامل',
+    username: 'اسم المستخدم',
+    email: 'البريد الإلكتروني',
+    phone: 'الهاتف',
+    status: 'الحالة',
+    active: 'نشط',
+    inactive: 'غير نشط',
+    group: 'المجموعة',
+    createdAt: 'تاريخ الإنشاء',
   },
   
   errors: {

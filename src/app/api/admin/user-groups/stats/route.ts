@@ -9,8 +9,8 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+  if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }

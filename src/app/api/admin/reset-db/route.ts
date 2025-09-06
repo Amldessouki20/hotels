@@ -5,8 +5,8 @@ import { verifyAuthFromRequest } from '@/lib/auth';
 export async function POST(request: NextRequest) {
   try {
     // Verify admin authentication
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+  if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user is admin (check group name or role)
-    if (authResult.user.group.name !== 'المديرين' && authResult.user.role !== 'ADMIN') {
+    if (authUser.group.name !== 'المديرين' && authUser.role !== 'ADMIN') {
       return NextResponse.json(
         { error: 'يجب أن تكون مدير للوصول لهذه الخدمة' },
         { status: 403 }

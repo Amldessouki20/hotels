@@ -21,15 +21,15 @@ export async function GET(
 ) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
       );
     }
 
-    const currentUser = authResult.user;
+    const currentUser = authUser;
 
     // التحقق من صلاحية الوصول لإدارة المستخدمين
     const hasPermission = await checkPermissionFromRequest(request, 'users', 'read');
@@ -168,8 +168,8 @@ export async function POST(
 ) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }
@@ -283,8 +283,8 @@ export async function DELETE(
 ) {
   try {
     // التحقق من المصادقة
-    const authResult = await verifyAuthFromRequest(request);
-    if (!authResult.success || !authResult.user) {
+    const authUser = await verifyAuthFromRequest(request);
+    if (!authUser) {
       return NextResponse.json(
         { error: 'غير مصرح لك بالوصول' },
         { status: 401 }

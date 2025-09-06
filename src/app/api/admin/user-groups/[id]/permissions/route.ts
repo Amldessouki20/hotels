@@ -6,12 +6,13 @@ const prisma = new PrismaClient();
 // GET - جلب صلاحيات مجموعة معينة
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // التحقق من وجود المجموعة
     const group = await prisma.userGroup.findUnique({
-      where: { id: params.id }
+      where: { id }
     });
 
     if (!group) {
@@ -24,7 +25,7 @@ export async function GET(
     // جلب صلاحيات المجموعة
     const groupPermissions = await prisma.groupPermission.findMany({
       where: { 
-        groupId: params.id,
+        groupId: id,
         isAllowed: true
       },
       include: {

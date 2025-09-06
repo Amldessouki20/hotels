@@ -22,11 +22,12 @@ const updatePermissionSchema = z.object({
 // GET - جلب صلاحية واحدة
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const permission = await prisma.permission.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         groupPermissions: {
           include: {
@@ -80,16 +81,17 @@ export async function GET(
 // PUT - تعديل صلاحية
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     const body = await request.json();
     const validatedData = updatePermissionSchema.parse(body);
 
-    // التحقق من وجود الصلاحية
-    const existingPermission = await prisma.permission.findUnique({
-      where: { id: params.id }
-    });
+    // التحقق من وجود الصلاحية أولاً
+      const existingPermission = await prisma.permission.findUnique({
+        where: { id }
+      });
 
     if (!existingPermission) {
       return NextResponse.json(
@@ -109,7 +111,7 @@ export async function PUT(
           AND: [
             { module: newModule },
             { action: newAction },
-            { id: { not: params.id } }
+            { id: { not: id } }
           ]
         }
       });
@@ -126,7 +128,7 @@ export async function PUT(
 
     // تعديل الصلاحية
     const updatedPermission = await prisma.permission.update({
-      where: { id: params.id },
+        where: { id },
       data: validatedData,
       include: {
         _count: {
@@ -159,12 +161,13 @@ export async function PUT(
 // DELETE - حذف صلاحية
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
     // التحقق من وجود الصلاحية
     const permission = await prisma.permission.findUnique({
-      where: { id: params.id },
+        where: { id },
       include: {
         _count: {
           select: {
@@ -199,7 +202,7 @@ export async function DELETE(
 
     // حذف الصلاحية
     await prisma.permission.delete({
-      where: { id: params.id }
+        where: { id }
     });
 
     return NextResponse.json(

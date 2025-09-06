@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { generateToken, verifyToken, JWTPayload } from './jwt';
+import { NextRequest } from 'next/server';
 
 const prisma = new PrismaClient();
 
@@ -319,5 +320,23 @@ export async function getAllStaffUsers(): Promise<AuthUser[]> {
   } catch (error) {
     console.error('Error fetching staff users:', error);
     return [];
+  }
+}
+
+/**
+ * Verify authentication from request headers
+ */
+export async function verifyAuthFromRequest(request: NextRequest): Promise<AuthUser | null> {
+  try {
+    const authHeader = request.headers.get('authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return null;
+    }
+
+    const token = authHeader.substring(7); // Remove 'Bearer ' prefix
+    return await verifyAuthToken(token);
+  } catch (error) {
+    console.error('Auth verification error:', error);
+    return null;
   }
 }

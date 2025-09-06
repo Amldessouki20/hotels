@@ -1,4 +1,4 @@
-import { AuthUser, verifyAuthTokenString } from './auth';
+import { AuthUser, verifyAuthFromRequest, verifyAuthToken } from './auth';
 import { NextRequest } from 'next/server';
 import { prisma } from './prisma';
 
@@ -217,7 +217,7 @@ export async function verifyPermissionFromRequest(
     }
 
     // التحقق من صحة التوكن
-    const user = await verifyAuthTokenString(token);
+    const user = await verifyAuthToken(token);
     if (!user) {
       return {
         success: false,
@@ -290,7 +290,7 @@ export function createAnyPermissionMiddleware(
       }
 
       // التحقق من صحة التوكن
-      const user = await verifyAuthTokenString(token);
+      const user = await verifyAuthToken(token);
       if (!user) {
         return {
           success: false,
@@ -429,3 +429,42 @@ export const COMMON_PERMISSIONS = {
   AUDIT_READ: buildPermissionKey(MODULES.AUDIT, ACTIONS.READ),
   AUDIT_MANAGE: buildPermissionKey(MODULES.AUDIT, ACTIONS.MANAGE)
 };
+
+/**
+ * Check permission from request
+ */
+export async function checkPermissionFromRequest(
+  request: NextRequest,
+  module: string,
+  action: string
+): Promise<{ success: boolean; user?: AuthUser; message?: string }> {
+  try {
+    const user = await verifyAuthFromRequest(request);
+    if (!user) {
+      return {
+        success: false,
+        message: 'Authentication required'
+      };
+    }
+
+    const hasAccess = await hasPermission(user.id, module, action);
+    if (!hasAccess) {
+      return {
+        success: false,
+        user,
+        message: 'Insufficient permissions'
+      };
+    }
+
+    return {
+      success: true,
+      user
+    };
+  } catch (error) {
+    console.error('Permission check error:', error);
+    return {
+      success: false,
+      message: 'Permission check failed'
+    };
+  }
+}
